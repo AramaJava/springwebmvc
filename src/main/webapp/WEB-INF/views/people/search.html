@@ -7,7 +7,7 @@
 <body>
 <p th:text="Вы искали людей с именем " >result</p>
 
-<div th:each="person : ${people}">
+<div th:each="person : ${searchResult}">
   <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()} + ', ' + ${person.getSurName()} + ', ' + ${person.getAge()}">user</a>
 </div>
 <hr>

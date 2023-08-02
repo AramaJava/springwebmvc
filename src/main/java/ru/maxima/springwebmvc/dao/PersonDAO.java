@@ -19,8 +19,9 @@ import java.util.List;
 
         Отдельное поле, куда нужно будет написать искомое имя
          + кнопку для поиска и выдавать всех пользователей,
-        у которых имя начинается на искомый стринг и возвращать
-        пользователю новую страницу с всеми людьми,
+        у которых имя начинается на искомый стринг
+
+        и возвращать пользователю новую страницу сo всеми людьми,
         где будет сверху надпись "Вы искали людей с именем ИСКОМОЕ_ИМЯ"
         и список всех людей, у которых имя начинается на искомый стринг.
 
@@ -73,8 +74,8 @@ public class PersonDAO {
         jdbcTemplate.update("DELETE from person WHERE id=?", id);
     }
 
-    public  List<Person> findPersonsByLastName( String name) {
-        String sql = "select * from person where name = ?";
+    public  List<Person> findPersonsByName( String name) {
+        String sql = "select * from person p where p.name like '%'?'%'";
         return new ArrayList<>(jdbcTemplate.query(sql,
                 BeanPropertyRowMapper.newInstance(Person.class), name));
     }

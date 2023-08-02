@@ -1,3 +1,10 @@
+-- 1. Create database first_db
+--CREATE DATABASE first_db
+--    WITH
+--    OWNER = postgres
+--    ENCODING = 'UTF8';
+
+-- 2. Create person table
 create table person (
                         id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                         name varchar(30) NOT NULL,

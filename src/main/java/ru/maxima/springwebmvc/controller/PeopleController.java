@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.maxima.springwebmvc.dao.PersonDAO;
 import ru.maxima.springwebmvc.entity.Person;
 
+import java.util.Collections;
+import java.util.List;
+
 
 /**
  * @author AramaJava 26.07.2023
@@ -71,6 +74,18 @@ public class PeopleController {
         return "redirect:/people";
     }
 
-
+    @GetMapping("/search{name}")
+    public String findByName(Model model, @PathVariable("name") String name) {
+        List<Person> list;
+        if (name != null && !name.isEmpty()) {
+            list = personDAO.findPersonsByName(name);
+        } else {
+            list = Collections.emptyList();
+        }
+        model.addAttribute("searchResult", list);
+        return "redirect:/search";
+    }
 }
+
+
 
