@@ -6,6 +6,3 @@ create table person (
                         email varchar(40) NOT NULL UNIQUE
 
 );
-
-drop table person;
-
