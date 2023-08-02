@@ -5,12 +5,32 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.maxima.springwebmvc.entity.Person;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * @author AramaJava 26.07.2023
  */
+
+    /*
+        Добавить на главную страницу приложения возможность поиска по имени.
+
+        Отдельное поле, куда нужно будет написать искомое имя
+         + кнопку для поиска и выдавать всех пользователей,
+        у которых имя начинается на искомый стринг и возвращать
+        пользователю новую страницу с всеми людьми,
+        где будет сверху надпись "Вы искали людей с именем ИСКОМОЕ_ИМЯ"
+        и список всех людей, у которых имя начинается на искомый стринг.
+
+        Метод контроллера с поиском по БД должен быть написан
+        с вызовом ДАО класса, который будет использовать JDBCTemplate,
+        необходимо погуглить, как искать в БД строки с колонками,
+        начинающиеся на искомый стринг.
+
+*/
+
 
 @Component
 public class PersonDAO {
@@ -23,16 +43,13 @@ public class PersonDAO {
     }
 
     public List<Person> index() {
-        return jdbcTemplate.query("SELECT * FROM person",
-                BeanPropertyRowMapper.newInstance(Person.class));
-
+        String sql = "select * from person";
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Person.class));
     }
 
     public Person show(int id) {
-        return jdbcTemplate.query("SELECT * FROM Person WHERE id=?",
-                        BeanPropertyRowMapper.newInstance(Person.class), id)
-                .stream().findAny().orElse(null);
-
+        return jdbcTemplate.queryForObject("SELECT * FROM Person WHERE id=?",
+                BeanPropertyRowMapper.newInstance(Person.class), id);
     }
 
     public void save(Person person) {
@@ -56,4 +73,9 @@ public class PersonDAO {
         jdbcTemplate.update("DELETE from person WHERE id=?", id);
     }
 
+    public  List<Person> findPersonsByLastName( String name) {
+        String sql = "select * from person where name = ?";
+        return new ArrayList<>(jdbcTemplate.query(sql,
+                BeanPropertyRowMapper.newInstance(Person.class), name));
+    }
 }
