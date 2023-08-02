@@ -34,7 +34,7 @@ public class PeopleController {
 
     @GetMapping("/{id}")
     private String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", personDAO.show(id));
+        model.addAttribute("id", personDAO.show(id));
         return "people/show";
     }
 
@@ -74,11 +74,11 @@ public class PeopleController {
         return "redirect:/people";
     }
 
-    @GetMapping("/search{name}")
-    public String findByName(Model model, @PathVariable("name") String name) {
+    @GetMapping("/search{keyword}")
+    public String findByName(Model model, @PathVariable("keyword") String keyword) {
         List<Person> list;
-        if (name != null && !name.isEmpty()) {
-            list = personDAO.findPersonsByName(name);
+        if (keyword != null && !keyword.isEmpty()) {
+            list = personDAO.findByName(keyword);
         } else {
             list = Collections.emptyList();
         }

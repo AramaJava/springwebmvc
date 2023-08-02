@@ -7,24 +7,27 @@
 <body>
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
     <label>Enter name:
-        <input th:type="text" th:field="*{name}">    </label>
+        <input th:type="text" th:field="*{name}">
+    </label>
         <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
 
     <br>
     <label>Enter surname:
-        <input th:type="text" th:field="*{surname}"> </label>
+        <input th:type="text" th:field="*{surname}">
+    </label>
         <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Surname error</div>
 
     <br>
     <label>Enter age:
-        <input th:type="text" th:field="*{age}">    </label>
+        <input th:type="text" th:field="*{age}">
+    </label>
         <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
 
     <br>
     <label>Enter email:
-        <input th:type="text" th:field="*{email}"> </label>
+        <input th:type="text" th:field="*{email}">
+    </label>
         <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
-
     <hr>
     <label>
         <input th:type="submit" value="Add Person">
