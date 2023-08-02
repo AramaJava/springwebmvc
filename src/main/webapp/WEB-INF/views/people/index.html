@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Peoples</title>
 </head>
 <body>
+<div th:each="person : ${people}">
+  <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()} + ', ' + ${person.getSurName()} + ', ' + ${person.getAge()}">user</a>
+</div>
+<br>
+<hr>
+<a th:href="@{/people/new}">Create new Person</a>
+<br>
+<br>
+<label>Search name
+    <input th:type="text">
+</label>
+<form th:method="submit" th:action="@{/people/search/{searchName}(searchName=)}">
+    <input type="submit" value="Search">
+</form>
 
+@{/people/{id}(id=${person.getId()})}"
 </body>
 </html>
