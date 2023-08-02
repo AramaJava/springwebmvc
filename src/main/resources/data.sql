@@ -3,4 +3,3 @@ insert into person (name, surname, age, email) values
     ('Alexey','Sherbakov', '30', 'alex@mail.ru'),
     ('Stas','Starovoytov', '43', 'stas@mail.ru'),
     ('Ruslan','Belyi', '50', 'ruslan@mail.ru');
-

@@ -5,9 +5,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.maxima.springwebmvc.entity.Person;
-
 import java.util.List;
-import java.util.Optional;
+
 
 /**
  * @author AramaJava 26.07.2023
@@ -24,7 +23,7 @@ public class PersonDAO {
     }
 
     public List<Person> index() {
-        return jdbcTemplate.query("SELECT * FROM Person",
+        return jdbcTemplate.query("SELECT * FROM person",
                 BeanPropertyRowMapper.newInstance(Person.class));
 
     }
@@ -37,15 +36,19 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO person () VALUES (?, ?)",
-                person.getFullname(),
-                person.getYearOfBirth());
+        jdbcTemplate.update("INSERT INTO person (name, surname, age, email) VALUES (?, ?, ?, ?)",
+                person.getName(),
+                person.getSurname(),
+                person.getAge(),
+                person.getEmail());
     }
 
     public void update(int id, Person updatedPerson) {
-        jdbcTemplate.update("UPDATE person SET full_name=?, year_of_birth=? WHERE id=?",
-                updatedPerson.getFullname(),
-                updatedPerson.getYearOfBirth(),
+        jdbcTemplate.update("UPDATE person SET name=?, surname=?, age=?, email=? WHERE id=?",
+                updatedPerson.getName(),
+                updatedPerson.getSurname(),
+                updatedPerson.getAge(),
+                updatedPerson.getEmail(),
                 id);
     }
 

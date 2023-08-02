@@ -1,5 +1,6 @@
 package ru.maxima.springwebmvc.entity;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -11,20 +12,22 @@ import jakarta.validation.constraints.Size;
 public class Person {
     private int id;
 
-    @NotEmpty(message = "ФИО не должно быть пустым")
-    @Size(min = 3, max= 100, message = "ФИО должно быть от 3 до 100 символов")
-    private String fullname;
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Size(min = 3, max = 100, message = "ФИО должно быть от 3 до 100 символов")
+    private String name;
 
-    @Min(value = 1900, message = "Год рождения > 1900")
-    private int yearOfBirth;
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Size(min = 3, max = 100, message = "ФИО должно быть от 3 до 100 символов")
+    private String surname;
+
+    @Min(value = 16, message = "Возраст больше 16")
+    private int age;
+
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Email(message = "почта указана неверно")
+    private String email;
 
     public Person() {
-    }
-
-    public Person(int id, String fullname, int yearOfBirth) {
-        this.id = id;
-        this.fullname = fullname;
-        this.yearOfBirth = yearOfBirth;
     }
 
     public int getId() {
@@ -35,19 +38,35 @@ public class Person {
         this.id = id;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getName() {
+        return name;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getYearOfBirth() {
-        return yearOfBirth;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setYearOfBirth(int yearOfBirth) {
-        this.yearOfBirth = yearOfBirth;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
