@@ -13,9 +13,9 @@
 <a th:href="@{/people/new}">Create new Person</a>
 <br>
 <br>
-<form th:method="GET" th:action="@{/people/search{name} (name=${keyword})}">
+<form th:method="GET" th:action="@{/people/search}">
 <label>Search name:
-    <input th:type="text" th:value="${keyword}" required>
+    <input name="search" th:type="text" required>
 </label>
 <label>
     <input th:type="submit" value="Search">
