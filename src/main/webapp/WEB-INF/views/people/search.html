@@ -5,10 +5,10 @@
   <title>Search result</title>
 </head>
 <body>
-<h1>Вы искали персоны с именем</h1>
-<p th:text="${keyword}">result</p>
-
-
+<h1 th:text="'Вы искали персоны с именем ' + ${keyword} + '!'">TEXT</h1>
+<div th:each="person:${searchResult}">
+  <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()} + ', ' + ${person.getSurname()} + ', ' + ${person.getAge()} + ', ' + ${person.getEmail()}">user</a>
+</div>
 <hr>
 <a th:href="@{/people}">Main page</a>
 </body>

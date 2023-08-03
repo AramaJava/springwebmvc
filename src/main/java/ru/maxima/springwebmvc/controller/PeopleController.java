@@ -83,6 +83,7 @@ public class PeopleController {
             searchResult = Collections.emptyList();
         }
         model.addAttribute("searchResult", searchResult);
+        model.addAttribute("keyword", keyword);
         return "people/search";
     }
 
