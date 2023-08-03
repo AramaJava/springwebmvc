@@ -74,8 +74,8 @@ public class PeopleController {
         return "redirect:/people";
     }
 
-    @GetMapping("/search{keyword}")
-    public String findByName(Model model, @PathVariable("keyword") String keyword) {
+    @GetMapping("/search")
+    public String findByName(Model model, @RequestParam("keyword") String keyword) {
         List<Person> searchResult;
         if (keyword != null && !keyword.isEmpty()) {
             searchResult = personDAO.findByName(keyword);

@@ -74,7 +74,7 @@ public class PersonDAO {
     }
 
     public  List<Person> findByName(String keyword) {
-        return jdbcTemplate.query("select * from person p where p.name like /%?",
+        return jdbcTemplate.query("select * from person p where p.name like ?",
                 BeanPropertyRowMapper.newInstance(Person.class), keyword);
     }
 }
