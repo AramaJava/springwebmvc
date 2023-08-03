@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.maxima.springwebmvc.entity.Person;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -75,8 +74,7 @@ public class PersonDAO {
     }
 
     public  List<Person> findByName(String keyword) {
-        String sql = "select * from person p where p.name like '%'?'%'";
-        return new ArrayList<>(jdbcTemplate.query(sql,
-                BeanPropertyRowMapper.newInstance(Person.class), keyword));
+        return jdbcTemplate.query("select * from person p where p.name like /%?",
+                BeanPropertyRowMapper.newInstance(Person.class), keyword);
     }
 }
