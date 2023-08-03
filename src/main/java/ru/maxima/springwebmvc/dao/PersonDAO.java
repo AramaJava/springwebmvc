@@ -74,9 +74,9 @@ public class PersonDAO {
         jdbcTemplate.update("DELETE from person WHERE id=?", id);
     }
 
-    public  List<Person> findByName(String name) {
+    public  List<Person> findByName(String keyword) {
         String sql = "select * from person p where p.name like '%'?'%'";
         return new ArrayList<>(jdbcTemplate.query(sql,
-                BeanPropertyRowMapper.newInstance(Person.class), name));
+                BeanPropertyRowMapper.newInstance(Person.class), keyword));
     }
 }
