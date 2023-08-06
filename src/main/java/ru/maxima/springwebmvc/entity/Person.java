@@ -23,7 +23,7 @@ public class Person {
     // Страна, Город, Индекс (состоит из 6 цифр)
     //Russia, Moscow - , 123456   -   ^\d{6,}$
     @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6,}",
-            message = "Адрес должен быть в формате: Страна, Город, индекс (6 цифр)")
+            message = "Адрес должен быть в формате: Country, City, Индекс (6 цифр)")
     private String address;
 
     @NotEmpty(message = "Поле не должно быть пустым")
