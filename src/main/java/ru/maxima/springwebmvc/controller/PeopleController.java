@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.maxima.springwebmvc.dao.PersonDAO;
 import ru.maxima.springwebmvc.entity.Person;
+import ru.maxima.springwebmvc.util.PersonValidator;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,8 +23,11 @@ public class PeopleController {
 
     private final PersonDAO personDAO;
 
-    public PeopleController(PersonDAO personDAO) {
+    private final PersonValidator personValidator;
+
+    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
+        this.personValidator = personValidator;
     }
 
     @GetMapping()
@@ -45,6 +49,9 @@ public class PeopleController {
 
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+
+        personValidator.validate(person, bindingResult);
+
         if (bindingResult.hasErrors()) return "people/new";
 
         personDAO.save(person);
@@ -60,6 +67,7 @@ public class PeopleController {
     @PostMapping("/{id}")
     private String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
                           @PathVariable("id") int id) {
+
         if (bindingResult.hasErrors()) {
             return "people/edit";
         }

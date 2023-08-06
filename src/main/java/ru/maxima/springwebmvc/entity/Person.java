@@ -1,9 +1,6 @@
 package ru.maxima.springwebmvc.entity;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 /**
  * @author AramaJava 26.07.2023
@@ -23,6 +20,12 @@ public class Person {
     @Min(value = 16, message = "Возраст больше 16")
     private int age;
 
+    // Страна, Город, Индекс (состоит из 6 цифр)
+    //Russia, Moscow - , 123456   -   ^\d{6,}$
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6,}",
+            message = "Адрес должен быть в формате: Страна, Город, индекс (6 цифр)")
+    private String address;
+
     @NotEmpty(message = "Поле не должно быть пустым")
     @Email(message = "почта указана неверно")
     private String email;
@@ -30,11 +33,12 @@ public class Person {
     public Person() {
     }
 
-    public Person(String name, String surname, int age, String email) {
+    public Person(String name, String surname, int age, String email, String  address) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.email = email;
+        this.address = address;
     }
 
     public int getId() {
@@ -75,5 +79,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

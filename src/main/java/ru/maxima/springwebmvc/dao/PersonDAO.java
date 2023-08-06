@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.maxima.springwebmvc.entity.Person;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -51,20 +52,27 @@ public class PersonDAO {
                 BeanPropertyRowMapper.newInstance(Person.class), id);
     }
 
+    public Optional<Person> show(String email) {
+        return jdbcTemplate.query("SELECT * FROM Person WHERE email=?",
+                BeanPropertyRowMapper.newInstance(Person.class), email).stream().findAny();
+    }
+
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO person (name, surname, age, email) VALUES (?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO person (name, surname, age, email, address) VALUES (?, ?, ?, ?, ?)",
                 person.getName(),
                 person.getSurname(),
                 person.getAge(),
-                person.getEmail());
+                person.getEmail(),
+                person.getAddress());
     }
 
     public void update(int id, Person updatedPerson) {
-        jdbcTemplate.update("UPDATE person SET name=?, surname=?, age=?, email=? WHERE id=?",
+        jdbcTemplate.update("UPDATE person SET name=?, surname=?, age=?, email=?, address=? WHERE id=?",
                 updatedPerson.getName(),
                 updatedPerson.getSurname(),
                 updatedPerson.getAge(),
                 updatedPerson.getEmail(),
+                updatedPerson.getAddress(),
                 id);
     }
 
@@ -76,4 +84,5 @@ public class PersonDAO {
         String sql = "select * from person p where p.name like ?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Person.class),keyword+'%');
     }
+
 }
