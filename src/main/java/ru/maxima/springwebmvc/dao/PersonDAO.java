@@ -51,10 +51,13 @@ public class PersonDAO {
         return jdbcTemplate.queryForObject("SELECT * FROM Person WHERE id=?",
                 BeanPropertyRowMapper.newInstance(Person.class), id);
     }
-
+    // перегрузил метод show еще и через емайл
     public Optional<Person> show(String email) {
         return jdbcTemplate.query("SELECT * FROM Person WHERE email=?",
-                BeanPropertyRowMapper.newInstance(Person.class), email).stream().findAny();
+               BeanPropertyRowMapper.newInstance(Person.class), email).stream().findAny();
+//           return Optional.of(jdbcTemplate.query("SELECT * FROM Person WHERE email=?",
+ //                     BeanPropertyRowMapper.newInstance(Person.class), email));
+
     }
 
     public void save(Person person) {
